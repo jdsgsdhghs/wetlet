@@ -62,6 +62,17 @@ const List = styled.ul`
   flex-direction: column;
   gap: 1rem;
 `;
+const Logo = styled.div`
+  font-size: 2.5rem;
+  font-family: 'Arial Black', Impact, sans-serif;
+  color: #e11d48;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px #fcd34d;
+  letter-spacing: 2px;
+  transform: rotate(-2deg);
+`;
+
 
 const ListItem = styled.li`
   display: flex;
@@ -162,7 +173,9 @@ export default function AdminPage() {
 
   return (
     <Container>
-      <Title>Admin – Tournée</Title>
+      <Logo>WET LEG –Moisturizer </Logo>
+      <Title>Gestion de la tournée</Title>
+
       <Button onClick={() => navigate("/admin/new")}>➕ Nouveau</Button>
 
       <List>
