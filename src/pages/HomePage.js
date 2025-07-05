@@ -3,6 +3,15 @@ import styled from "styled-components";
 import { db } from "../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
+import BottomNav from "../components/BottomNav";
+import NewAlbumSection from "../components/NewAlbumSection";
+import MuffinSectionComponent from "../components/MuffinSectionComponent";
+import TornPaperSeparator from "../components/TornPaperSeparator";
+import BlogSection from "../components/BlogSection";
+import HeroImageBlock from "../components/HeroImageBlock";
+import Footer from "../components/Footer";
+
+
 // Styled Components
 const Container = styled.div`
   padding: 2rem;
@@ -70,7 +79,6 @@ const SoldOut = styled.span`
   font-size: 0.875rem;
 `;
 
-
 export default function HomePage() {
   const [tourDates, setTourDates] = useState([]);
   const tourDateRef = collection(db, "tourDates");
@@ -92,23 +100,21 @@ export default function HomePage() {
   }, [tourDateRef]);
 
   return (
-    <Container>
-      <Title>Wet Leg</Title>
-      <Description>
-        Wet Leg est un duo indie rock britannique fondé en 2019 par Rhian Teasdale et Hester Chambers. 
-        Après “Chaise Longue”, leur succès est mondial. Leur second album <em>“Moisturizer”</em> sort en 2025.
-      </Description>
-      <Subtitle>Tournée 2025</Subtitle>
-      <List>
-        {tourDates.map(t => (
-          <ListItem key={t.id}>
-            <DateAndPlace>
-              <strong>{t.date}</strong> – {t.city}, {t.country} @ {t.venue}
-            </DateAndPlace>
-            {t.soldOut && <SoldOut>Sold Out</SoldOut>}
-          </ListItem>
-        ))}
-      </List>
-    </Container>
+    <>
+       <HeroImageBlock
+        imageSrc="/assets/images/hero-home.png"
+        titleImageSrc="/assets/images/title-moz.png"
+      />
+
+        <BottomNav />
+        
+        <NewAlbumSection />
+        <MuffinSectionComponent />
+         <TornPaperSeparator />
+
+      <BlogSection />
+<Footer />
+      
+    </>
   );
 }

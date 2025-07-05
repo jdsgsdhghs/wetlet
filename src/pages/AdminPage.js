@@ -3,143 +3,76 @@ import { db } from "../config/firebase";
 import { collection, deleteDoc, doc, onSnapshot, query } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+// Animations
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+const scaleIn = keyframes`
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+`;
 
 // Styled Components
-const Container = styled.div`
-  position: relative;
-  padding: 2rem;
-  max-width: 800px;
-  margin: auto;
-  font-family: 'Segoe UI', sans-serif;
-  color: #1e293b;
-  background-image: url('/textures/paper-fibers.png');
-  background-repeat: repeat;
-  background-size: cover;
-  background-position: center;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  z-index: 0;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.6);
-    z-index: -1;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
-
+const Container = styled.div`padding: 2rem; max-width: 720px; margin: auto;`;
+const Title = styled.h1`font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem; color: #1e293b;`;
 const Button = styled.button`
-  background-color: ${props => props.color || "#2563eb"};
+  background-color: #2563eb;
   color: white;
   font-weight: 600;
-  padding: 0.6rem 1rem;
+  padding: 0.75rem 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  &:hover {
-    background-color: ${props => props.hoverColor || "#1d4ed8"};
-  }
+  transition: background 0.3s;
+  &:hover { background-color: #1d4ed8; }
 `;
-
-const List = styled.ul`
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-const Logo = styled.div`
-  font-size: 2.5rem;
-  font-family: 'Arial Black', Impact, sans-serif;
-  color: #e11d48;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  text-shadow: 2px 2px #fcd34d;
-  letter-spacing: 2px;
-  transform: rotate(-2deg);
-`;
-
-
+const List = styled.ul`margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;`;
 const ListItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 1.25rem;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  align-items: center;
+  display: flex; justify-content: space-between;
+  padding: 1rem; background-color: #ffffff;
+  border: 1px solid #e2e8f0; border-radius: 10px;
 `;
-
+const DeleteButton = styled.button`
+  color: #dc2626; font-weight: 500; background: none;
+  border: none; cursor: pointer;
+  &:hover { text-decoration: underline; }
+`;
 const SoldOut = styled.span`
-  color: #dc2626;
-  font-weight: 600;
-  margin-left: 0.5rem;
+  color: #dc2626; font-weight: 600; margin-left: 0.5rem;
 `;
 
+// Modal styles with animation
 const ModalOverlay = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+  animation: ${fadeIn} 0.3s ease-out;
 `;
 
-const ModalBox = styled.div`
+const ModalContent = styled.div`
   background: white;
   padding: 2rem;
   border-radius: 12px;
-  max-width: 400px;
   text-align: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  max-width: 400px;
+  animation: ${scaleIn} 0.3s ease-out;
 `;
 
-const ModalTitle = styled.h3`
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-`;
-
-const ModalButtons = styled.div`
+const ModalActions = styled.div`
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1.5rem;
-`;
-
-const ModalBtn = styled.button`
-  padding: 0.5rem 1.25rem;
-  border-radius: 8px;
-  border: none;
-  background: ${props => props.danger ? "#dc2626" : "#10b981"};
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-
-  &:hover {
-    opacity: 0.9;
-  }
 `;
 
 export default function AdminPage() {
   const [tourDates, setTourDates] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const navigate = useNavigate();
 
@@ -153,29 +86,27 @@ export default function AdminPage() {
     return () => unsubscribe();
   }, []);
 
-  const openModal = (id) => {
+  const confirmDelete = (id) => {
     setSelectedId(id);
-    setModalOpen(true);
+    setShowModal(true);
   };
 
   const handleDelete = async () => {
-    if (!selectedId) return;
-    try {
+    if (selectedId) {
       await deleteDoc(doc(db, "tourDates", selectedId));
-      setTourDates(prev => prev.filter(item => item.id !== selectedId));
-    } catch (error) {
-      console.error("Erreur de suppression :", error);
-    } finally {
-      setModalOpen(false);
+      setShowModal(false);
       setSelectedId(null);
     }
   };
 
+  const cancelDelete = () => {
+    setShowModal(false);
+    setSelectedId(null);
+  };
+
   return (
     <Container>
-      <Logo>WET LEG –Moisturizer </Logo>
-      <Title>Gestion de la tournée</Title>
-
+      <Title>Dates de tournée du groupe wetleg</Title>
       <Button onClick={() => navigate("/admin/new")}>➕ Nouveau</Button>
 
       <List>
@@ -188,37 +119,35 @@ export default function AdminPage() {
             <div style={{ display: "flex", gap: "0.5rem" }}>
               <Button
                 onClick={() => navigate(`/admin/edit/${t.id}`)}
-                color="#0284c7"
-                hoverColor="#0369a1"
+                style={{ backgroundColor: "#0284c7", display: "flex", alignItems: "center", gap: "0.5rem" }}
               >
                 <FaEdit />
                 Modifier
               </Button>
-              <Button
-                onClick={() => openModal(t.id)}
-                color="#dc2626"
-                hoverColor="#b91c1c"
+              <DeleteButton
+                onClick={() => confirmDelete(t.id)}
+                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
               >
                 <FaTrash />
                 Supprimer
-              </Button>
+              </DeleteButton>
             </div>
           </ListItem>
         ))}
       </List>
 
-      {modalOpen && (
+      {showModal && (
         <ModalOverlay>
-          <ModalBox>
-            <ModalTitle>Confirmer la suppression</ModalTitle>
-            <p>Voulez-vous vraiment supprimer cette date ?</p>
-            <ModalButtons>
-              <ModalBtn danger onClick={handleDelete}>Oui</ModalBtn>
-              <ModalBtn onClick={() => setModalOpen(false)}>Annuler</ModalBtn>
-            </ModalButtons>
-          </ModalBox>
+          <ModalContent>
+            <p>Es-tu sûr(e) de vouloir supprimer cette date de tournée ?</p>
+            <ModalActions>
+              <Button onClick={handleDelete} style={{ backgroundColor: "#dc2626" }}>Oui, Supprimer</Button>
+              <Button onClick={cancelDelete} style={{ backgroundColor: "#94a3b8" }}>Annuler</Button>
+            </ModalActions>
+          </ModalContent>
         </ModalOverlay>
       )}
     </Container>
   );
 }
+

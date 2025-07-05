@@ -35,6 +35,7 @@ export default function Header() {
       <Title>Wet Leg Manager</Title>
       <Nav>
         <Link to="/">Accueil</Link>
+        {/* <Link to="/admin">Admin</Link> */}
       </Nav>
     </HeaderWrapper>
   );
