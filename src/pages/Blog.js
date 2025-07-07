@@ -26,7 +26,7 @@ const BlogPage = () => {
       <BottomNav />
       <BlogSection />
       <BlogWrapper>
-        {/* Tu pourras ajouter ici plus tard le bloc de texte, un bouton “DÉCOUVRIR” etc. */}
+       
       </BlogWrapper>
       <BlogCarouselSection />
       <BlogRewardSection />

@@ -3,10 +3,13 @@ import styled from "styled-components";
 
 const TitleWrapper = styled.div`
   position: relative;
-  width: 100%; /* ou une largeur adaptée */
-  height: 100px; /* ajuste selon besoin */
-  transform: translate(-400px, 10px); /* ↔ gauche (X), ↕ haut (Y) */
+  width: 777px; /* ou une largeur adaptée */
+  height: 124px; /* ajuste selon besoin */
+  transform: translate(-210px, 25px); /* ↔ gauche (X), ↕ haut (Y) */
    z-index: 2; /* 🔼 met au-dessus */
+   font-family: "OPTIVenus", sans-serif;
+  
+   
 `;
 
 const TornBlock = styled.div`
@@ -45,6 +48,7 @@ const Container = styled.div`
   padding-inline: 17rem;
   gap: 4rem;
   flex-wrap: wrap;
+  background-color: #f7f5f2;
 
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -102,7 +106,7 @@ const Button = styled.a`
   letter-spacing: 1px;
   transition: background-color 0.3s;
   margin-top: 1rem;
-  transform: translate(20px, -200px); /* ↔ gauche (X), ↕ haut (Y) */
+  transform: translate(180px, -130px); /* ↔ gauche (X), ↕ haut (Y) */
 
   &:hover {
     background-color: #6a852e;
@@ -111,10 +115,11 @@ const Button = styled.a`
 
 
 const ImageContainer = styled.div`
-  position: relative;
-  width: 660px;
+  position: absolute;
+  width: 560px;
   height: auto;
- transform: translate(-60px, -200px); /* ↔ gauche (X), ↕ haut (Y) */
+  
+ transform: translate(450px, -50px); /* ↔ gauche (X), ↕ haut (Y) */
   @media (max-width: 768px) {
     margin: auto;
   }
@@ -122,12 +127,13 @@ const ImageContainer = styled.div`
 
   const TextPaperWrapper = styled.div`
   position: relative;
-  width: 250px;
+  width: 550px;
   height: auto;
+  align-items: flex-start; 
   display: flex;
   justify-content: center;
-  align-items: center;
-  transform: translate(90px, -150px); /* pour le positionner comme tu veux */
+ align-items: flex-start; 
+  transform: translate(20px, -100px); /* pour le positionner comme tu veux */
   z-index: 2; /* 🔼 met au-dessus */
 `;
 
@@ -138,6 +144,7 @@ const RippedPaper = styled.img`
    max-height: 500px; // facul
   max-width: 1150px;
   height: auto;
+  
   position: relative;
   display: block;
 `;const PaperText = styled.div`
@@ -150,8 +157,9 @@ const RippedPaper = styled.img`
   font-size: 1.05rem;
   width: 82%;             /* ✅ s'adapte à l’intérieur du papier sans le déformer */
   line-height: 1.6;
-  padding: 0.5rem;
-  text-align: justify;
+ align-items: flex-start; 
+  transform: translate(-220px, -114px);
+  
   z-index: 2;
 `;
 
@@ -188,7 +196,7 @@ export default function NewAlbumSection() {
           <TextPaperWrapper>
   <RippedPaper src="assets/images/fond-papier.png" alt="Fond déchiré" />
   <PaperText>
-  L’album *Moisturizer* de Wet Leg, sorti le 11 juillet 2025, marque une évolution notable dans leur son. Enregistré à Southwold, l’album dévoile une approche plus affirmée et introspective.
+  L’album Moisturizer de Wet Leg, sorti le 11 juillet 2025, marque une évolution notable dans leur son. Enregistré à Southwold, Norfolk, avec le producteur Dan Carey, il dévoile une approche plus énergique et affirmée, tout en conservant leur humour décalé et leur style unique. Des titres comme "Catch These Fists", "Davina McCall" et "CPR" illustrent cette nouvelle direction, mêlant des riffs incisifs à des paroles introspectives.
 </PaperText>
 
 </TextPaperWrapper>

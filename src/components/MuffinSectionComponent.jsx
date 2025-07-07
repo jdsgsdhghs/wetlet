@@ -5,7 +5,7 @@ const MuffinSection = styled.section`
   justify-content: space-between;
   align-items: flex-start;
   padding: 6rem 8rem 6rem 8rem; /* top right bottom left */
-   margin-top: -20rem; /* 🔼 fait vraiment remonter la section */
+   margin-top: -5rem; /* 🔼 fait vraiment remonter la section */
    background-color: #f7f5f2;
 
 `;
@@ -42,17 +42,18 @@ const VideoText = styled.p`
   font-size: 0.85rem;
   line-height: 1.7;
   text-align: left;
-  max-width: 220px;
+  max-width: 145px;
   transform: translate(-15px, -150px); 
   font-family: "Helvetica", sans-serif;
   padding: 0.2rem 0;
+  transform: translate(-90px, -150px);
 `;
 
 
 const VinylImage = styled.img`
   max-width: 100%;
   height: auto;
-  transform: translate(-15px, 180px); 
+  transform: translate(-15px, -200px); 
 `;
 const StarImage = styled.img`
   position: absolute;
@@ -77,7 +78,7 @@ export default function MuffinSectionComponent() {
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/HmAsUQEFYGI"
+            src="https://www.youtube.com/embed/HeL2M8jBEI4"
             title="CPR - Wet Leg"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

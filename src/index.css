@@ -8,5 +8,6 @@ html, body {
   padding: 0;
   overflow-x: hidden; /* ça évite que l’écran "rebouge" sur le côté */
   scroll-behavior: smooth;
+  background-color: #f7f5f2;
 }
 

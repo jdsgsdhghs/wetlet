@@ -12,6 +12,8 @@ z-index: 0;
   font-family: 'Helvetica', sans-serif;
   margin-top: -60px;
   position: relative;
+   transform: translateY(-475px); 
+   
 `;
 
 const ContentWrapper = styled.div`
@@ -23,6 +25,7 @@ const ContentWrapper = styled.div`
   border-radius: 8px;
   position: relative;   /* ⬅️ Obligatoire pour que z-index fonctionne */
   z-index: 1;  
+  
 `;
 
 const Title = styled.h2`
@@ -84,5 +87,6 @@ export default function BlogSection() {
         <Button href="#">DÉCOUVRIR</Button>
       </ContentWrapper>
     </Section>
+    
   );
 }

@@ -7,6 +7,7 @@ const TracklistSection = styled.section`
   position: relative;
   margin-top: -160px;
 `;
+
 const TracklistTitle = styled.h2`
   font-family: 'Anton', sans-serif;
   font-size: 6rem;
@@ -14,9 +15,14 @@ const TracklistTitle = styled.h2`
   margin-bottom: 2rem;
   position: relative;
   z-index: 10;
-   transform: translate(120px, -50px);
-`;
+  transform: translate(120px, -50px);
 
+  @media (max-width: 480px) {
+    font-size: 2.4rem;
+    transform: none;
+    margin-top: 1rem;
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,18 +31,28 @@ const Wrapper = styled.div`
   align-items: flex-start;
   gap: 3rem;
   flex-wrap: wrap;
-   transform: translateY(-230px); 
+  transform: translateY(-230px); 
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    transform: none;
+  }
 `;
 
 const AlbumCard = styled.div`
   background: black;
   color: white;
-  padding: 1rem;
+  padding: 1rem 1rem 3.5rem 1rem;
   border-radius: 20px;
   max-width: 250px;
   text-align: center;
-  padding: 1rem 1rem 3.5rem 1rem;
   transform: translate(-80px, 30px);
+
+  @media (max-width: 480px) {
+    transform: none;
+    margin-bottom: 1rem;
+  }
 `;
 
 const AlbumCover = styled.img`
@@ -58,12 +74,17 @@ const TracklistContainer = styled.div`
   background: url('/assets/images/fond-green.png');
   background-size: cover;
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1rem 1rem 5.5rem 2rem;
   min-width: 250px;
   position: relative;
-  padding: 1rem 1rem 5.5rem 2rem;
   transform: translate(-80px, 150px);
-   z-index: 3; /* Devant */
+  z-index: 3;
+
+  @media (max-width: 480px) {
+    transform: none;
+    width: 100%;
+    max-width: 300px;
+  }
 `;
 
 const Track = styled.p`
@@ -78,19 +99,26 @@ const ReleaseBadge = styled.div`
   right: -20px;
   background: url('/assets/images/fond-gris.png');
   background-size: cover;
-  padding: 1rem 2rem;
+  padding: 1.5rem 1rem;
   border-radius: 10px;
   font-weight: bold;
   font-size: 0.9rem;
   transform: translate(110px, 50px);
-   padding: 1.5rem 1rem 1.5rem 1rem;
-    z-index: 3; /* Devant */
+  z-index: 3;
+
+  @media (max-width: 480px) {
+    transform: none;
+    top: -10px;
+    right: 10px;
+    font-size: 0.8rem;
+  }
 `;
+
 const TopLeftAngle = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  width: 7px; /* ajuste la taille si besoin */
+  width: 7px;
   z-index: 1;
   transform: translate(65px, 65px);
 `;
@@ -99,7 +127,7 @@ const BottomRightAngle = styled.img`
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 60px; /* ajuste la taille si besoin */
+  width: 60px;
   z-index: 1;
   transform: translate(-65px, -65px);
 `;
@@ -110,21 +138,28 @@ const Star2 = styled.img`
   bottom: -10px;
   width: 60px;
   transform: translate(-15px, 15px);
+
+  @media (max-width: 480px) {
+    width: 40px;
+    bottom: -5px;
+  }
 `;
+
 const Star = styled.img`
   position: absolute;
   top: 5px;
   right: -20px;
   width: 90px;
-   z-index: 1;
-   transform: translate(35px, 190px);
+  z-index: 1;
+  transform: translate(35px, 190px);
 `;
+
 const StarBehind = styled.img`
   position: absolute;
-  bottom: 40px; /* ajuste selon le visuel */
+  bottom: 40px;
   left: 30px;
   width: 80px;
-  z-index: 0; /* bien derrière tout */
+  z-index: 0;
   opacity: 0.8;
   transform: translate(930px, -380px);
 `;
@@ -133,9 +168,9 @@ export default function TracklistBlock() {
   return (
     <TracklistSection>
       <TopLeftAngle src="/assets/images/corner-top-left.png" alt="Angle haut gauche" />
-  <BottomRightAngle src="/assets/images/corner-bottom-right.png" alt="Angle bas droit" />
-  <StarBehind src="/assets/images/star.png" alt="Star" />
-    <TracklistTitle>Tracklist</TracklistTitle>
+      <BottomRightAngle src="/assets/images/corner-bottom-right.png" alt="Angle bas droit" />
+      <StarBehind src="/assets/images/star.png" alt="Star" />
+      <TracklistTitle>Tracklist</TracklistTitle>
 
       <Wrapper>
         <AlbumCard>
@@ -144,13 +179,9 @@ export default function TracklistBlock() {
           <ArtistName>Wetleg</ArtistName>
           <Star2 src="/assets/images/star2.png" />
         </AlbumCard>
- 
-        <TracklistContainer>
-       
 
-          <ReleaseBadge>OUT 11 JUILLET 2025
-             
-          </ReleaseBadge>
+        <TracklistContainer>
+          <ReleaseBadge>OUT 11 JUILLET 2025</ReleaseBadge>
           <Track>1. CPR</Track>
           <Track>2. Liquidize</Track>
           <Track>3. catch these fists</Track>

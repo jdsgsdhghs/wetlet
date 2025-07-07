@@ -19,6 +19,7 @@ const Container = styled.div`
   margin: auto;
   font-family: 'Segoe UI', sans-serif;
   color: #1e293b;
+  
 `;
 
 const Title = styled.h1`
@@ -70,6 +71,7 @@ const DateAndPlace = styled.span`
   font-weight: 500;
 `;
 
+
 const SoldOut = styled.span`
   color: #dc2626;
   font-weight: 600;
@@ -110,9 +112,11 @@ export default function HomePage() {
         
         <NewAlbumSection />
         <MuffinSectionComponent />
+        
          <TornPaperSeparator />
 
       <BlogSection />
+       
 <Footer />
       
     </>

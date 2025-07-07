@@ -3,19 +3,9 @@ import { db } from "../config/firebase";
 import { collection, deleteDoc, doc, onSnapshot, query } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-// Animations
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
-`;
-const scaleIn = keyframes`
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-`;
-
-// Styled Components
+// --- Styles ---
 const Container = styled.div`padding: 2rem; max-width: 720px; margin: auto;`;
 const Title = styled.h1`font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem; color: #1e293b;`;
 const Button = styled.button`
@@ -44,36 +34,26 @@ const SoldOut = styled.span`
   color: #dc2626; font-weight: 600; margin-left: 0.5rem;
 `;
 
-// Modal styles with animation
+// --- Modal Style ---
 const ModalOverlay = styled.div`
-  position: fixed; top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex; justify-content: center; align-items: center;
-  z-index: 1000;
-  animation: ${fadeIn} 0.3s ease-out;
+  z-index: 999;
 `;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
+const ModalBox = styled.div`
+  background: white; padding: 2rem; border-radius: 12px; max-width: 400px; width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   text-align: center;
-  max-width: 400px;
-  animation: ${scaleIn} 0.3s ease-out;
 `;
-
 const ModalActions = styled.div`
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
+  display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;
 `;
 
 export default function AdminPage() {
   const [tourDates, setTourDates] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedId, setSelectedId] = useState(null);
+  const [idToDelete, setIdToDelete] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -86,22 +66,17 @@ export default function AdminPage() {
     return () => unsubscribe();
   }, []);
 
-  const confirmDelete = (id) => {
-    setSelectedId(id);
+  const confirmDelete = id => {
+    setIdToDelete(id);
     setShowModal(true);
   };
 
   const handleDelete = async () => {
-    if (selectedId) {
-      await deleteDoc(doc(db, "tourDates", selectedId));
+    if (idToDelete) {
+      await deleteDoc(doc(db, "tourDates", idToDelete));
       setShowModal(false);
-      setSelectedId(null);
+      setIdToDelete(null);
     }
-  };
-
-  const cancelDelete = () => {
-    setShowModal(false);
-    setSelectedId(null);
   };
 
   return (
@@ -117,17 +92,11 @@ export default function AdminPage() {
               {t.soldOut && <SoldOut>(Sold Out)</SoldOut>}
             </span>
             <div style={{ display: "flex", gap: "0.5rem" }}>
-              <Button
-                onClick={() => navigate(`/admin/edit/${t.id}`)}
-                style={{ backgroundColor: "#0284c7", display: "flex", alignItems: "center", gap: "0.5rem" }}
-              >
+              <Button onClick={() => navigate(`/admin/edit/${t.id}`)} style={{ backgroundColor: "#0284c7", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <FaEdit />
                 Modifier
               </Button>
-              <DeleteButton
-                onClick={() => confirmDelete(t.id)}
-                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-              >
+              <DeleteButton onClick={() => confirmDelete(t.id)} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <FaTrash />
                 Supprimer
               </DeleteButton>
@@ -138,16 +107,15 @@ export default function AdminPage() {
 
       {showModal && (
         <ModalOverlay>
-          <ModalContent>
+          <ModalBox>
             <p>Es-tu sûr(e) de vouloir supprimer cette date de tournée ?</p>
             <ModalActions>
-              <Button onClick={handleDelete} style={{ backgroundColor: "#dc2626" }}>Oui, Supprimer</Button>
-              <Button onClick={cancelDelete} style={{ backgroundColor: "#94a3b8" }}>Annuler</Button>
+              <Button onClick={handleDelete}>Oui, supprimer</Button>
+              <Button style={{ backgroundColor: "#9ca3af" }} onClick={() => setShowModal(false)}>Annuler</Button>
             </ModalActions>
-          </ModalContent>
+          </ModalBox>
         </ModalOverlay>
       )}
     </Container>
   );
 }
-
