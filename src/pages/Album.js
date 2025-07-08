@@ -6,60 +6,62 @@ import styled from "styled-components";
 import TracklistBlock from "../components/TracklistSection";
 import Footer from "../components/Footer";
 
+// 📦 Wrapper général
 const TopWrapper = styled.div`
   text-align: center;
-  background-color: white;
-  padding: 2rem 1rem 0 1rem;
-  width: 100vw;
-  left: 50%;
-  transform: translateX(-50%);
+  background-color: #f7f5f2;
+  padding: 2rem 1rem 0;
+  width: 100%;
   position: relative;
 
-  @media (max-width: 480px) {
-    padding: 1rem 0.5rem 0 0.5rem;     // ✅ Mobile padding
-    width: 100%;                      // ✅ Avoid horizontal overflow
-    transform: none;                  // ✅ Keep centered
+  @media (max-width: 768px) {
+    padding: 1rem 1rem 0;
   }
 `;
 
+// 🧾 Citations
 const Quote = styled.p`
   font-family: 'Anton', sans-serif;
   font-size: 1.1rem;
   margin: 0.5rem 0;
 
-  @media (max-width: 480px) {
-    font-size: 0.95rem;               // ✅ Mobile font-size
-    line-height: 1.3;                 // ✅ Better readability
-  }
-`;
-
-const HeroWrapperDesktop = styled.div`
   @media (max-width: 768px) {
-    display: none;
+    font-size: 0.95rem;
+    margin: 0.25rem 0;
   }
 `;
 
+// 🖼️ Image paysage
 const LandscapeImage = styled.img`
   width: 100%;
   height: auto;
   object-fit: cover;
   border-top: 8px solid white;
+  margin-bottom: 1.5rem;
 
-  @media (max-width: 480px) {
-    border-top: 4px solid white;     // ✅ Thinner border for mobile
-    margin-bottom: -100px;           // ✅ Avoid spacing conflict with separator
+  @media (max-width: 768px) {
+    border-top: 4px solid white;
   }
 `;
 
+// 📦 Pour gérer la marge du bloc tracklist
+const TracklistWrapper = styled.div`
+  margin-top: -30px;
+
+  @media (max-width: 768px) {
+    margin-top: -15px;
+  }
+`;
+
+// 💿 Page album
 const Album = () => {
   return (
     <div>
-      <HeroWrapperDesktop>
-        <HeroImageBlock
-          imageSrc="/assets/images/hero-home.png"
-          titleImageSrc="/assets/images/title-moz.png"
-        />
-      </HeroWrapperDesktop>
+      {/* Hero image uniquement visible sur desktop */}
+      <HeroImageBlock
+        imageSrc="/assets/images/hero-home.png"
+        titleImageSrc="/assets/images/title-moz.png"
+      />
 
       <BottomNav />
 
@@ -67,20 +69,12 @@ const Album = () => {
         <Quote>Is your muffin buttered?</Quote>
         <Quote>Would you like us to assign someone to butter your muffin?</Quote>
 
-        <LandscapeImage
-          src="/assets/images/muffine-paysage.png"
-          alt="Paysage Muffin"
-        />
+        <LandscapeImage src="/assets/images/muffine-paysage.png" alt="Paysage Muffin" />
+        <TornPaperSeparator />
 
-        <TornPaperSeparator
-            transform="translateY(-112px)"
-            mobileTransform="translateY(-60px)"
-            zIndex={3}
-            mobileZIndex={1}
-        />
-
-
-        <TracklistBlock />
+        <TracklistWrapper>
+          <TracklistBlock />
+        </TracklistWrapper>
       </TopWrapper>
 
       <Footer />

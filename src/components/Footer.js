@@ -7,6 +7,7 @@ const FooterWrapper = styled.footer`
   color: white;
   text-align: center;
   padding: 2.5rem 1rem 1.5rem 1rem;
+  
 `;
 
 const LogoImage = styled.img`

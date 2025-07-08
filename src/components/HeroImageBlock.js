@@ -2,10 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const HeroSection = styled.section`
-  height: calc(100vh - 57px);  /* ✅ pour libérer l’espace de la nav */
+  height: calc(100vh - 57px);
   width: 100%;
- padding: 2rem 1.5rem 2rem 1.5rem; /* haut droite bas gauche */
-
+  padding: 2rem 1.5rem;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -13,12 +12,16 @@ const HeroSection = styled.section`
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const BackgroundImage = styled.img`
-  width: 100%;          /* ✅ prend toute la largeur dispo */
-  height: 100%;         /* ✅ prend toute la hauteur dispo */
-  object-fit: cover;    /* ✅ couvre sans déformation */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border: 8px solid white;
 `;
 

@@ -13,6 +13,8 @@ import Footer from "../components/Footer";
 
 
 // Styled Components
+
+
 const Container = styled.div`
   padding: 2rem;
   max-width: 800px;
@@ -80,7 +82,13 @@ const SoldOut = styled.span`
   border-radius: 6px;
   font-size: 0.875rem;
 `;
+const Wrapper = styled.div`
+  position: relative;
+`;
 
+const FooterWrapper = styled.div`
+  margin-top: -540px; /* adapte cette valeur */
+`;
 export default function HomePage() {
   const [tourDates, setTourDates] = useState([]);
   const tourDateRef = collection(db, "tourDates");
@@ -114,11 +122,12 @@ export default function HomePage() {
         <MuffinSectionComponent />
         
          <TornPaperSeparator />
-
+ <Wrapper>
       <BlogSection />
-       
+    <FooterWrapper> 
 <Footer />
-      
+</FooterWrapper>   
+  </Wrapper>    
     </>
   );
 }

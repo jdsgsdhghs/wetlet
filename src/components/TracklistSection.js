@@ -2,22 +2,29 @@ import styled from "styled-components";
 import React from "react";
 
 const TracklistSection = styled.section`
-  padding: 6rem 1.5rem 2rem;
+  padding: 4rem 1.5rem;
   background-color: #f7f7f7;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    margin-top: 0;
+  }
 `;
 
 const TracklistTitle = styled.h2`
   font-family: 'Anton', sans-serif;
   font-size: 6rem;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   position: relative;
   z-index: 10;
+  transform: translate(120px, -50px);
 
-  @media (max-width: 480px) {
-    font-size: 2.4rem;
-    margin: 2rem 0;
+  @media (max-width: 768px) {
+    font-size: 3rem;
+    transform: none;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -28,11 +35,13 @@ const Wrapper = styled.div`
   align-items: flex-start;
   gap: 3rem;
   flex-wrap: wrap;
+  transform: translateY(-230px);
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
-    padding: 0 1rem;
+    transform: none;
+    gap: 2rem;
   }
 `;
 
@@ -43,12 +52,10 @@ const AlbumCard = styled.div`
   border-radius: 20px;
   max-width: 250px;
   text-align: center;
-  position: relative;
+  transform: translate(-80px, 30px);
 
-  @media (max-width: 480px) {
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 1.5rem;
+  @media (max-width: 768px) {
+    transform: none;
   }
 `;
 
@@ -71,14 +78,16 @@ const TracklistContainer = styled.div`
   background: url('/assets/images/fond-green.png');
   background-size: cover;
   border-radius: 20px;
-  padding: 1rem 1rem 5rem 2rem;
+  padding: 2rem;
   min-width: 250px;
-  max-width: 300px;
   position: relative;
+  padding: 1rem 1rem 5.5rem 2rem;
+  transform: translate(-80px, 150px);
+  z-index: 3;
 
-  @media (max-width: 480px) {
-    width: 100%;
-    padding: 1rem;
+  @media (max-width: 768px) {
+    transform: none;
+    padding: 1rem 1.5rem 4rem 1.5rem;
   }
 `;
 
@@ -90,60 +99,74 @@ const Track = styled.p`
 
 const ReleaseBadge = styled.div`
   position: absolute;
-  top: -25px;
-  right: -25px;
+  top: -20px;
+  right: -20px;
   background: url('/assets/images/fond-gris.png');
   background-size: cover;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   border-radius: 10px;
   font-weight: bold;
   font-size: 0.9rem;
+  transform: translate(110px, 50px);
   z-index: 3;
 
-  @media (max-width: 480px) {
-    top: 10px;
-    left: 10px;
-    right: auto;
-    font-size: 0.8rem;
+  @media (max-width: 768px) {
+    position: static;
+    transform: none;
+    margin-bottom: 1rem;
+    align-self: center;
   }
 `;
 
 const TopLeftAngle = styled.img`
   position: absolute;
-  top: 65px;
-  left: 65px;
+  top: 0;
+  left: 0;
   width: 7px;
   z-index: 1;
+  transform: translate(65px, 65px);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const BottomRightAngle = styled.img`
   position: absolute;
-  bottom: 65px;
-  right: 65px;
+  bottom: 0;
+  right: 0;
   width: 60px;
   z-index: 1;
+  transform: translate(-65px, -65px);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Star2 = styled.img`
   position: absolute;
-  left: 10px;
-  bottom: 10px;
+  left: -10px;
+  bottom: -10px;
   width: 60px;
+  transform: translate(-15px, 15px);
 
-  @media (max-width: 480px) {
-    width: 35px;
+  @media (max-width: 768px) {
+    width: 40px;
+    transform: translate(-10px, 10px);
   }
 `;
 
 const Star = styled.img`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: -20px;
   width: 90px;
   z-index: 1;
+  transform: translate(35px, 190px);
 
-  @media (max-width: 480px) {
-    width: 40px;
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -152,14 +175,12 @@ const StarBehind = styled.img`
   bottom: 40px;
   left: 30px;
   width: 80px;
-  z-index: 2;
+  z-index: 0;
   opacity: 0.8;
+  transform: translate(930px, -380px);
 
-  @media (max-width: 480px) {
-    left: 10px;
-    bottom: 10px;
-    width: 50px;
-    opacity: 0.6;
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -168,7 +189,7 @@ export default function TracklistBlock() {
     <TracklistSection>
       <TopLeftAngle src="/assets/images/corner-top-left.png" alt="Angle haut gauche" />
       <BottomRightAngle src="/assets/images/corner-bottom-right.png" alt="Angle bas droit" />
-      <StarBehind src="/assets/images/star.png" alt="Étoile fond" />
+      <StarBehind src="/assets/images/star.png" alt="Star" />
       <TracklistTitle>Tracklist</TracklistTitle>
 
       <Wrapper>
@@ -193,7 +214,6 @@ export default function TracklistBlock() {
           <Track>10. Don’t speak</Track>
           <Track>11. 11:21</Track>
           <Track>12. U and me at home</Track>
-          <Star src="/assets/images/star.png" alt="Étoile Tracklist" />
         </TracklistContainer>
       </Wrapper>
     </TracklistSection>

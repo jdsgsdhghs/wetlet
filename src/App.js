@@ -9,6 +9,8 @@ import Album from "./pages/Album";
 import Wetleg from "./pages/wetleg";
 import BlogPage from "./pages/Blog";
 
+import GlobalStyle from './GlobalStyle';
+
 function App() {
   const [isAdmin, setIsAdmin] = useState(() => {
     return localStorage.getItem("isAdmin") === "true";
@@ -24,7 +26,9 @@ function App() {
   }, []);
 
   return (
+    
     <Router>
+      <GlobalStyle />
       <Routes>
         <Route path="/" element={<HomePage />} />
 
@@ -39,8 +43,11 @@ function App() {
 <Route path="/wetleg" element={<Wetleg />} />
 <Route path="/blog" element={<BlogPage />} /> 
         <Route path="/tour" element={<TourPage />} />
+        
+
       </Routes>
     </Router>
+    
   );
 }
 

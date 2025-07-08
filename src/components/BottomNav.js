@@ -10,7 +10,7 @@ const NavContainer = styled.nav`
   font-family: 'Helvetica', sans-serif;
 `;
 
-// Desktop Nav (masqué sur mobile)
+// Navigation desktop (visible seulement au-dessus de 768px)
 const DesktopNav = styled.div`
   background-color: #111;
   padding: 1.2rem 0;
@@ -28,6 +28,7 @@ const DesktopNav = styled.div`
   }
 `;
 
+// Item de navigation
 const NavItem = styled(Link)`
   color: white;
   text-decoration: none;
@@ -50,16 +51,17 @@ const NavItem = styled(Link)`
   }
 `;
 
-// Mobile Nav Bar top (logo + icône menu)
+// Nav mobile en haut (logo + menu)
 const MobileNavBar = styled.div`
   display: none;
-  background-color: white;
-  padding: 1rem 1.5rem;
-  justify-content: space-between;
-  align-items: center;
 
   @media (max-width: 768px) {
     display: flex;
+    background-color: white;
+    padding: 1rem 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
   }
 `;
 
@@ -86,7 +88,7 @@ const Overlay = styled.div`
   z-index: 1040;
 `;
 
-// Menu mobile
+// Menu mobile latéral
 const MobileMenu = styled.div`
   position: fixed;
   top: 0;
@@ -133,7 +135,7 @@ export default function BottomNav() {
 
   return (
     <NavContainer>
-      {/* Nav Bureau */}
+      {/* Nav Desktop */}
       <DesktopNav>
         <NavItem to="/wetleg">WETLEG</NavItem>
         <NavItem to="/album">ALBUM</NavItem>
@@ -141,17 +143,15 @@ export default function BottomNav() {
         <NavItem to="/blog">BLOG</NavItem>
       </DesktopNav>
 
-      {/* Nav Mobile (uniquement visible quand menu est fermé) */}
-      {!menuOpen && (
-        <MobileNavBar>
-          <Logo>MOZ</Logo>
-          <IconWrapper onClick={() => setMenuOpen(true)}>
-            <Menu size={28} />
-          </IconWrapper>
-        </MobileNavBar>
-      )}
+      {/* Nav Mobile Top */}
+      <MobileNavBar>
+        <Logo>MOZ</Logo>
+        <IconWrapper onClick={() => setMenuOpen(true)}>
+          <Menu size={28} />
+        </IconWrapper>
+      </MobileNavBar>
 
-      {/* Menu Mobile + Overlay */}
+      {/* Overlay + Menu Mobile */}
       {menuOpen && (
         <>
           <Overlay onClick={() => setMenuOpen(false)} />

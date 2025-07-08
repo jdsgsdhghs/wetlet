@@ -27,10 +27,13 @@ const Title = styled.h2`
 
 const Subtitle = styled.h3`
   font-family: "Dancing Script", cursive;
-  font-size: 1.8rem;
+  font-size: 3.8rem;
   margin: 0.2rem 0 1rem;
   transform: translate(300px, -30px);
+  color: #000000;
+  font-family: 'Kiara Script', cursive;
 `;
+
 
 const Paragraph = styled.p`
   font-size: 0.9rem;
@@ -49,7 +52,7 @@ const Button = styled.button`
   cursor: pointer;
   transform: translate(300px, -30px);
   &:hover {
-    background-color: #55b752;
+    background-color: #80BC3E;
   }
 `;
 

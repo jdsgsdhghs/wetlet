@@ -8,7 +8,7 @@ const SectionWrapper = styled.section`
   text-align: center;
   padding: 21rem 1rem 6rem;
   position: relative;
-  
+   transform: translate(0px, 90px);
 `;
 
 const TitleWrapper = styled.div`
@@ -41,7 +41,7 @@ const Text = styled.p`
 `;
 
 const Button = styled.button`
-  background-color: #69cf66;
+  background-color: #80BC3E;
   color: white;
   padding: 0.6rem 1.8rem;
   transform: translate(700px, -10px);
@@ -69,7 +69,7 @@ const TornBottom = styled.img`
   position: absolute;
   bottom: 0;
   left: 0;
-  transform: translate(-2px, 64px);
+  transform: translate(-2px, -25px);
   z-index: 10; /* plus haut que les autres */
   pointer-events: none; /* pour éviter de bloquer les clics en dessous */
 `;

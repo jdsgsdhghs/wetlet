@@ -5,6 +5,13 @@ import BottomNav from "../components/BottomNav";
 import GaleriePhoto from "../components/GaleriePhoto";
 import Footer from "../components/Footer";
 
+// ✅ Affiche uniquement sur desktop
+const DesktopOnly = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const Section = styled.section`
   display: flex;
   align-items: center;
@@ -14,11 +21,9 @@ const Section = styled.section`
   background-color: #f7f5f2;
   position: relative;
 
-  /* Mobile styles */
   @media (max-width: 768px) {
-    flex-direction: column; /* Arrange elements vertically */
-    padding: 2rem 1rem;
-    gap: 2rem;
+    flex-direction: column;
+    text-align: center;
   }
 `;
 
@@ -28,10 +33,10 @@ const PhotoWrapper = styled.div`
   border: 30px solid white;
   box-shadow: 70px 65px 60px rgba(252, 246, 246, 0.97);
 
-  /* Mobile styles */
   @media (max-width: 768px) {
-    max-width: 100%;
-    margin-bottom: 1rem;
+    margin: 0 auto;
+    max-width: 90%;
+    border: 15px solid white;
   }
 `;
 
@@ -45,35 +50,28 @@ const Tape = styled.img`
   bottom: -20px;
   right: -20px;
   width: 300px;
-  transform: rotate(-15deg);
-  transform: translate(100px, 150px);
+  transform: translate(100px, 150px) rotate(-15deg);
 
-  /* Mobile styles */
   @media (max-width: 768px) {
-    width: 200px;
-    transform: translate(50px, 80px);
+    display: none;
   }
 `;
 
 const Content = styled.div`
   max-width: 500px;
-  text-align: center;
 
-  /* Mobile styles */
   @media (max-width: 768px) {
-    max-width: 100%;
+    padding: 0 1rem;
   }
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   position: relative;
+  justify-content: center;
 
-  /* Mobile styles */
   @media (max-width: 768px) {
-    justify-content: center;
     margin-bottom: 1rem;
   }
 `;
@@ -85,7 +83,6 @@ const Title = styled.h1`
   margin: 0;
   z-index: 1;
 
-  /* Mobile styles */
   @media (max-width: 768px) {
     font-size: 3rem;
   }
@@ -99,41 +96,37 @@ const Star = styled.img`
   transform: ${({ rotate, translateX = 0, translateY = 0 }) =>
     `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg)`};
 
-  /* Mobile styles */
   @media (max-width: 768px) {
-    width: 80px;
+    width: 60px;
     top: -10px;
-    right: -30px;
+    right: -10px;
+    transform: rotate(${({ rotate }) => rotate || 0}deg);
   }
 `;
 
 const Subtitle = styled.h3`
   margin-top: 1rem;
   font-weight: bold;
-
-  /* Mobile styles */
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
 `;
 
 const Paragraph = styled.p`
   font-size: 0.95rem;
   line-height: 1.5;
-  margin-top: 1rem;
-
-  /* Mobile styles */
-  @media (max-width: 768px) {
-    font-size: 0.95rem;
-    text-align: center;
-  }
 `;
 
 const Wetleg = () => {
   return (
     <div>
-      {/* HeroImageBlock should be hidden on mobile */}
+      {/* ✅ Affiché uniquement sur desktop */}
+      <DesktopOnly>
+        <HeroImageBlock
+          imageSrc="/assets/images/hero-home.png"
+          titleImageSrc="/assets/images/title-moz.png"
+        />
+      </DesktopOnly>
+
       <BottomNav />
+
       <Section>
         <PhotoWrapper>
           <Image src="/assets/images/wetleg-photo.png" alt="Wetleg" />
@@ -142,15 +135,28 @@ const Wetleg = () => {
 
         <Content>
           <TitleWrapper>
-            <Star src="/assets/images/Star.png" alt="Star" rotate={25} translateX={-250} translateY={-40} />
+            <Star
+              src="/assets/images/Star.png"
+              alt="Star"
+              rotate={25}
+              translateX={-250}
+              translateY={-40}
+            />
             <Title>WETLEG</Title>
           </TitleWrapper>
           <Subtitle>Ironie, guitare, liberté.</Subtitle>
           <Paragraph>
-            Wet Leg est un duo britannique formé sur l'île de Wight, connu pour ses morceaux à la fois percutants et désinvoltes. Avec une énergie brute et un goût prononcé pour l’absurde, elles bousculent les codes de l’indie rock avec humour et fraîcheur. Leur musique, portée par des guitares nerveuses et des refrains accrocheurs, évoque autant la spontanéité de la jeunesse que le besoin d’évasion.
+            Wet Leg est un duo britannique formé sur l'île de Wight, connu pour
+            ses morceaux à la fois percutants et désinvoltes. Avec une énergie
+            brute et un goût prononcé pour l’absurde, elles bousculent les
+            codes de l’indie rock avec humour et fraîcheur. Leur musique,
+            portée par des guitares nerveuses et des refrains accrocheurs,
+            évoque autant la spontanéité de la jeunesse que le besoin
+            d’évasion.
           </Paragraph>
         </Content>
       </Section>
+
       <GaleriePhoto />
       <Footer />
     </div>

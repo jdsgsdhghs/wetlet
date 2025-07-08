@@ -44,7 +44,7 @@ const VideoText = styled.p`
   text-align: left;
   max-width: 145px;
   transform: translate(-15px, -150px); 
-  font-family: "Helvetica", sans-serif;
+  font-family: "Roboto", sans-serif;
   padding: 0.2rem 0;
   transform: translate(-90px, -150px);
 `;

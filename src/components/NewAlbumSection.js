@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 
 const TitleWrapper = styled.div`
   position: relative;
@@ -31,7 +33,7 @@ const TornText = styled.div`
   color: #000;
   padding: 1rem;
   width: 80%;
-  font-family: "Helvetica", sans-serif;
+  font-family: "Roboto", sans-serif;
 `;
 
 
@@ -94,7 +96,7 @@ const Description = styled.p`
   z-index: 2;
 `;
 
-const Button = styled.a`
+const Button = styled(Link)`
   display: inline-block;
   background-color: #7e9d38;
   color: white;
@@ -105,11 +107,12 @@ const Button = styled.a`
   font-size: 0.85rem;
   letter-spacing: 1px;
   transition: background-color 0.3s;
+  transform: translate(200px, -140px);
   margin-top: 1rem;
-  transform: translate(180px, -130px); /* ↔ gauche (X), ↕ haut (Y) */
+   /* ↔ gauche (X), ↕ haut (Y) */
 
   &:hover {
-    background-color: #6a852e;
+    background-color: #80BC3E;
   }
 `;
 
@@ -155,7 +158,7 @@ const RippedPaper = styled.img`
   color: #000;
   font-family: "Helvetica", sans-serif;
   font-size: 1.05rem;
-  width: 82%;             /* ✅ s'adapte à l’intérieur du papier sans le déformer */
+  width: 82%;             
   line-height: 1.6;
  align-items: flex-start; 
   transform: translate(-220px, -114px);
@@ -203,7 +206,8 @@ export default function NewAlbumSection() {
 
 
          
-          <Button href="#">DÉCOUVRIR</Button>
+          <Button to="/album">DÉCOUVRIR</Button>
+
         </Text>
         <ImageContainer>
           <AlbumImage src="assets/images/album-cover.png" alt="Album Moisturizer" />
