@@ -17,15 +17,14 @@ z-index: 0;
 `;
 
 const ContentWrapper = styled.div`
- background-image: url("/assets/images/fond-vert-transparent.png")
+  background-image: url("/assets/images/fond-vert-transparent.png");
   backdrop-filter: blur(3px);
   padding: 3rem 2rem;
   max-width: 750px;
   margin: 0 auto;
   border-radius: 8px;
   position: relative;   /* ⬅️ Obligatoire pour que z-index fonctionne */
-  z-index: 1;  
-  
+  z-index: 1;
 `;
 
 const Title = styled.h2`
