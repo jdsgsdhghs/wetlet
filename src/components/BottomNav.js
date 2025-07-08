@@ -141,13 +141,15 @@ export default function BottomNav() {
         <NavItem to="/blog">BLOG</NavItem>
       </DesktopNav>
 
-      {/* Nav Mobile */}
-      <MobileNavBar>
-        <Logo>MOZ</Logo>
-        <IconWrapper onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </IconWrapper>
-      </MobileNavBar>
+      {/* Nav Mobile (uniquement visible quand menu est fermé) */}
+      {!menuOpen && (
+        <MobileNavBar>
+          <Logo>MOZ</Logo>
+          <IconWrapper onClick={() => setMenuOpen(true)}>
+            <Menu size={28} />
+          </IconWrapper>
+        </MobileNavBar>
+      )}
 
       {/* Menu Mobile + Overlay */}
       {menuOpen && (

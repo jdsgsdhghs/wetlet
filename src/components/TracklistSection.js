@@ -2,25 +2,22 @@ import styled from "styled-components";
 import React from "react";
 
 const TracklistSection = styled.section`
-  padding: 4rem 1.5rem;
+  padding: 6rem 1.5rem 2rem;
   background-color: #f7f7f7;
   position: relative;
-  margin-top: -160px;
 `;
 
 const TracklistTitle = styled.h2`
   font-family: 'Anton', sans-serif;
   font-size: 6rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   position: relative;
   z-index: 10;
-  transform: translate(120px, -50px);
 
   @media (max-width: 480px) {
     font-size: 2.4rem;
-    transform: none;
-    margin-top: 1rem;
+    margin: 2rem 0;
   }
 `;
 
@@ -31,12 +28,11 @@ const Wrapper = styled.div`
   align-items: flex-start;
   gap: 3rem;
   flex-wrap: wrap;
-  transform: translateY(-230px); 
 
   @media (max-width: 480px) {
     flex-direction: column;
     align-items: center;
-    transform: none;
+    padding: 0 1rem;
   }
 `;
 
@@ -47,12 +43,12 @@ const AlbumCard = styled.div`
   border-radius: 20px;
   max-width: 250px;
   text-align: center;
-  transform: translate(-80px, 30px);
   position: relative;
 
   @media (max-width: 480px) {
-    transform: none;
-    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -75,16 +71,14 @@ const TracklistContainer = styled.div`
   background: url('/assets/images/fond-green.png');
   background-size: cover;
   border-radius: 20px;
-  padding: 1rem 1rem 5.5rem 2rem;
+  padding: 1rem 1rem 5rem 2rem;
   min-width: 250px;
+  max-width: 300px;
   position: relative;
-  transform: translate(-80px, 150px);
-  z-index: 3;
 
   @media (max-width: 480px) {
-    transform: none;
     width: 100%;
-    max-width: 300px;
+    padding: 1rem;
   }
 `;
 
@@ -96,72 +90,60 @@ const Track = styled.p`
 
 const ReleaseBadge = styled.div`
   position: absolute;
-  top: -30px;
-  right: -40px;
+  top: -25px;
+  right: -25px;
   background: url('/assets/images/fond-gris.png');
   background-size: cover;
-  padding: 1.5rem 1rem;
+  padding: 1rem;
   border-radius: 10px;
   font-weight: bold;
   font-size: 0.9rem;
-  transform: translate(110px, 50px);
   z-index: 3;
 
   @media (max-width: 480px) {
     top: 10px;
     left: 10px;
     right: auto;
-    transform: none;
     font-size: 0.8rem;
   }
 `;
 
 const TopLeftAngle = styled.img`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 65px;
+  left: 65px;
   width: 7px;
   z-index: 1;
-  transform: translate(65px, 65px);
 `;
 
 const BottomRightAngle = styled.img`
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 65px;
+  right: 65px;
   width: 60px;
   z-index: 1;
-  transform: translate(-65px, -65px);
 `;
 
 const Star2 = styled.img`
   position: absolute;
-  left: -10px;
-  bottom: -10px;
+  left: 10px;
+  bottom: 10px;
   width: 60px;
-  transform: translate(-15px, 15px);
 
   @media (max-width: 480px) {
     width: 35px;
-    left: 10px;
-    bottom: 10px;
-    transform: none;
   }
 `;
 
 const Star = styled.img`
   position: absolute;
-  top: 5px;
-  right: -20px;
+  top: 10px;
+  right: 10px;
   width: 90px;
   z-index: 1;
-  transform: translate(35px, 190px);
 
   @media (max-width: 480px) {
     width: 40px;
-    top: 10px;
-    right: 10px;
-    transform: none;
   }
 `;
 
@@ -170,14 +152,12 @@ const StarBehind = styled.img`
   bottom: 40px;
   left: 30px;
   width: 80px;
-  z-index: 0;
+  z-index: 2;
   opacity: 0.8;
-  transform: translate(930px, -380px);
 
   @media (max-width: 480px) {
     left: 10px;
     bottom: 10px;
-    transform: none;
     width: 50px;
     opacity: 0.6;
   }
