@@ -65,11 +65,11 @@ const MobileNavBar = styled.div`
   }
 `;
 
-const Logo = styled.div`
-  font-family: 'Anton', sans-serif;
-  font-size: 1.7rem;
-  color: #d24fd3;
+const LogoImage = styled.img`
+  height: ${(props) => props.size || "35px"};
+  object-fit: contain;
 `;
+
 
 const IconWrapper = styled.div`
   cursor: pointer;
@@ -145,7 +145,7 @@ export default function BottomNav() {
 
       {/* Nav Mobile Top */}
       <MobileNavBar>
-        <Logo>MOZ</Logo>
+        <LogoImage src="/assets/images/logo-moz.png" alt="MOZ logo" />
         <IconWrapper onClick={() => setMenuOpen(true)}>
           <Menu size={28} />
         </IconWrapper>
@@ -157,7 +157,7 @@ export default function BottomNav() {
           <Overlay onClick={() => setMenuOpen(false)} />
           <MobileMenu>
             <MenuHeader>
-              <Logo>MOZ</Logo>
+              <LogoImage src="/assets/images/logo-moz.png" alt="MOZ logo" />
               <IconWrapper onClick={() => setMenuOpen(false)}>
                 <X size={32} />
               </IconWrapper>

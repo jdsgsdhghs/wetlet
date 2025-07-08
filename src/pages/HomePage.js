@@ -11,84 +11,27 @@ import BlogSection from "../components/BlogSection";
 import HeroImageBlock from "../components/HeroImageBlock";
 import Footer from "../components/Footer";
 
+// Wrapper spécifique pour version mobile
+const MobileWrapper = styled.div`
+  background-color: white;
 
-// Styled Components
-
-
-const Container = styled.div`
-  padding: 2rem;
-  max-width: 800px;
-  margin: auto;
-  font-family: 'Segoe UI', sans-serif;
-  color: #1e293b;
-  
-`;
-
-const Title = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  text-align: center;
-`;
-
-const Description = styled.p`
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #475569;
-`;
-
-const Subtitle = styled.h2`
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #334155;
-`;
-
-const List = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const ListItem = styled.li`
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  font-size: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: transform 0.2s;
-
-  &:hover {
-    transform: translateY(-2px);
+  @media (min-width: 769px) {
+    background-color: transparent;
   }
 `;
 
-const DateAndPlace = styled.span`
-  font-weight: 500;
-`;
-
-
-const SoldOut = styled.span`
-  color: #dc2626;
-  font-weight: 600;
-  background-color: #fee2e2;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-`;
 const Wrapper = styled.div`
   position: relative;
 `;
 
 const FooterWrapper = styled.div`
-  margin-top: -540px; /* adapte cette valeur */
+  margin-top: -540px;
+
+  @media (max-width: 768px) {
+    margin-top: 0;
+  }
 `;
+
 export default function HomePage() {
   const [tourDates, setTourDates] = useState([]);
   const tourDateRef = collection(db, "tourDates");
@@ -97,7 +40,7 @@ export default function HomePage() {
     const getTourDates = async () => {
       try {
         const data = await getDocs(tourDateRef);
-        const tourDates_ = data.docs.map(doc => ({
+        const tourDates_ = data.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }));
@@ -110,24 +53,23 @@ export default function HomePage() {
   }, [tourDateRef]);
 
   return (
-    <>
-       <HeroImageBlock
+    <MobileWrapper>
+      <HeroImageBlock
         imageSrc="/assets/images/hero-home.png"
         titleImageSrc="/assets/images/title-moz.png"
       />
 
-        <BottomNav />
-        
-        <NewAlbumSection />
-        <MuffinSectionComponent />
-        
-         <TornPaperSeparator />
- <Wrapper>
-      <BlogSection />
-    <FooterWrapper> 
-<Footer />
-</FooterWrapper>   
-  </Wrapper>    
-    </>
+      <BottomNav />
+      <NewAlbumSection />
+      <MuffinSectionComponent />
+      <TornPaperSeparator />
+
+      <Wrapper>
+        <BlogSection />
+        <FooterWrapper>
+          <Footer />
+        </FooterWrapper>
+      </Wrapper>
+    </MobileWrapper>
   );
 }

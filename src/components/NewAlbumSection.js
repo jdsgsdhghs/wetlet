@@ -2,43 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
-const TitleWrapper = styled.div`
-  position: relative;
-  width: 777px; /* ou une largeur adaptée */
-  height: 124px; /* ajuste selon besoin */
-  transform: translate(-210px, 25px); /* ↔ gauche (X), ↕ haut (Y) */
-   z-index: 2; /* 🔼 met au-dessus */
-   font-family: "OPTIVenus", sans-serif;
-  
-   
-`;
-
-const TornBlock = styled.div`
-  position: relative;
-  max-width: 600px; /* tu peux augmenter/diminuer */
-  margin-left: auto; /* ⬅️ le pousse vers la droite */
-  margin-right: 0;
-`;
-const TornImage = styled.img`
-  width: 100%;
-  display: block;
-`;
-const TornText = styled.div`
-  position: absolute;
-  top: 50%; /* ajuste verticalement */
-  left: 50%; /* ajuste horizontalement */
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #000;
-  padding: 1rem;
-  width: 80%;
-  font-family: "Roboto", sans-serif;
-`;
-
-
 const Section = styled.section`
   padding: 4rem 0;
+  background-color: #f7f5f2;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    background-color: white;
+    position: relative;
+  }
 `;
 
 const Container = styled.div`
@@ -50,11 +22,44 @@ const Container = styled.div`
   padding-inline: 17rem;
   gap: 4rem;
   flex-wrap: wrap;
-  background-color: #f7f5f2;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     flex-direction: column;
-    padding-inline: 2rem;
+    padding: 0;
+    gap: 2rem;
+    text-align: center;
+  }
+`;
+
+const TitleWrapper = styled.div`
+  position: relative;
+  width: 777px;
+  height: 124px;
+  transform: translate(-210px, 25px);
+  z-index: 2;
+  font-family: "OPTIVenus", sans-serif;
+
+  @media (max-width: 768px) {
+    width: auto;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-family: "Anton", sans-serif;
+  position: absolute;
+  top: -40px;
+  left: 10%;
+  transform: translateX(85%);
+  z-index: 2;
+
+  @media (max-width: 768px) {
+    position: static;
+    transform: none;
+    font-size: 2rem;
     text-align: center;
   }
 `;
@@ -66,34 +71,48 @@ const Text = styled.div`
   align-items: flex-start;
   gap: 1rem;
   position: relative;
+
+  @media (max-width: 768px) {
+    align-items: center;
+  }
 `;
 
-const Title = styled.h2`
-  font-size: 3.5rem;
-  font-weight: 800;
-  font-family: "Anton", sans-serif;
+const TextPaperWrapper = styled.div`
   position: relative;
+  width: 550px;
+  transform: translate(20px, -100px);
   z-index: 2;
+
+  @media (max-width: 768px) {
+    transform: none;
+    width: 100%;
+  }
+`;
+
+const RippedPaper = styled.img`
+  width: 800px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+`;
+
+const PaperText = styled.div`
   position: absolute;
-  top: -40px; 
-  left: 5; /* Commence à gauche */
-  transition: left 0.3s ease;
-  left: 10px; // un peu vers la droite
-left: 200px; // encore plus à droite
-left: 10%; transform: translateX(85%); // centré
-
-  
-  
-`;
-
-
-
-const Description = styled.p`
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 2rem;
-  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-220px, -114px);
+  color: #000;
+  font-family: "Helvetica", sans-serif;
+  font-size: 1.05rem;
+  width: 82%;
+  line-height: 1.6;
   z-index: 2;
+
+  @media (max-width: 768px) {
+    transform: translate(-50%, -50%);
+    font-size: 0.95rem;
+    width: 90%;
+  }
 `;
 
 const Button = styled(Link)`
@@ -109,66 +128,28 @@ const Button = styled(Link)`
   transition: background-color 0.3s;
   transform: translate(200px, -140px);
   margin-top: 1rem;
-   /* ↔ gauche (X), ↕ haut (Y) */
 
   &:hover {
-    background-color: #80BC3E;
+    background-color: #80bc3e;
+  }
+
+  @media (max-width: 768px) {
+    transform: none;
   }
 `;
-
 
 const ImageContainer = styled.div`
   position: absolute;
   width: 560px;
   height: auto;
-  
- transform: translate(450px, -50px); /* ↔ gauche (X), ↕ haut (Y) */
+  transform: translate(450px, -50px);
+
   @media (max-width: 768px) {
-    margin: auto;
+    position: static;
+    transform: none;
+    width: 100%;
   }
 `;
-
-  const TextPaperWrapper = styled.div`
-  position: relative;
-  width: 550px;
-  height: auto;
-  align-items: flex-start; 
-  display: flex;
-  justify-content: center;
- align-items: flex-start; 
-  transform: translate(20px, -100px); /* pour le positionner comme tu veux */
-  z-index: 2; /* 🔼 met au-dessus */
-`;
-
-
-
-const RippedPaper = styled.img`
-  width: 800px;
-   max-height: 500px; // facul
-  max-width: 1150px;
-  height: auto;
-  
-  position: relative;
-  display: block;
-`;const PaperText = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #000;
-  font-family: "Helvetica", sans-serif;
-  font-size: 1.05rem;
-  width: 82%;             
-  line-height: 1.6;
- align-items: flex-start; 
-  transform: translate(-220px, -114px);
-  
-  z-index: 2;
-`;
-
-
-
-
 
 const AlbumImage = styled.img`
   width: 100%;
@@ -186,29 +167,69 @@ const TapeRight = styled(Tape)`
   right: -180px;
   transform: rotate(5deg);
   width: 450px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+// 🌟 Étoiles en caractères bleue ciel
+const StarChar = styled.span`
+  position: absolute;
+  font-size: 1.5rem;
+  color: #87CEEB;
+  z-index: 3;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
+const StarTop = styled(StarChar)`
+  top: 10px;
+  left: 10px;
+`;
+
+const StarMiddle = styled(StarChar)`
+  bottom: 80px;
+  right: 20px;
+`;
+
+const StarBottom = styled(StarChar)`
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export default function NewAlbumSection() {
   return (
     <Section>
+      {/* Étoiles caractères en mobile */}
+      <StarTop>★</StarTop>
+      <StarMiddle>★</StarMiddle>
+      <StarBottom>★</StarBottom>
+
       <Container>
         <TitleWrapper>
-  <Title>NEW ALBUM</Title>
-</TitleWrapper>
+          <Title>NEW ALBUM</Title>
+        </TitleWrapper>
+
         <Text>
           <TextPaperWrapper>
-  <RippedPaper src="assets/images/fond-papier.png" alt="Fond déchiré" />
-  <PaperText>
-  L’album Moisturizer de Wet Leg, sorti le 11 juillet 2025, marque une évolution notable dans leur son. Enregistré à Southwold, Norfolk, avec le producteur Dan Carey, il dévoile une approche plus énergique et affirmée, tout en conservant leur humour décalé et leur style unique. Des titres comme "Catch These Fists", "Davina McCall" et "CPR" illustrent cette nouvelle direction, mêlant des riffs incisifs à des paroles introspectives.
-</PaperText>
+            <RippedPaper src="assets/images/fond-papier.png" alt="Fond déchiré" />
+            <PaperText>
+              L’album Moisturizer de Wet Leg, sorti le 11 juillet 2025, marque une évolution
+              notable dans leur son. Enregistré à Southwold, Norfolk, avec le producteur Dan Carey,
+              il dévoile une approche plus énergique et affirmée, tout en conservant leur humour
+              décalé et leur style unique. Des titres comme "Catch These Fists", "Davina McCall" et
+              "CPR" illustrent cette nouvelle direction, mêlant des riffs incisifs à des paroles
+              introspectives.
+            </PaperText>
+          </TextPaperWrapper>
 
-</TextPaperWrapper>
-
-
-         
           <Button to="/album">DÉCOUVRIR</Button>
-
         </Text>
+
         <ImageContainer>
           <AlbumImage src="assets/images/album-cover.png" alt="Album Moisturizer" />
           <TapeRight src="assets/images/tape-right.png" alt="Tape Right" />
