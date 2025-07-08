@@ -80,38 +80,44 @@ const Text = styled.div`
 const TextPaperWrapper = styled.div`
   position: relative;
   width: 550px;
+  height: auto;
   transform: translate(20px, -100px);
   z-index: 2;
 
   @media (max-width: 768px) {
-    transform: none;
     width: 100%;
+    max-width: 350px;
+    transform: none;
+    margin: 0 auto;
   }
 `;
 
 const RippedPaper = styled.img`
-  width: 800px;
-  max-width: 100%;
+  width: 100%;
   height: auto;
   display: block;
+  position: relative;
+  z-index: 1;
 `;
 
 const PaperText = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-220px, -114px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3rem 2rem;
   color: #000;
   font-family: "Helvetica", sans-serif;
   font-size: 1.05rem;
-  width: 82%;
   line-height: 1.6;
+  overflow: hidden;
   z-index: 2;
+  pointer-events: none;
 
   @media (max-width: 768px) {
-    transform: translate(-50%, -50%);
     font-size: 0.95rem;
-    width: 90%;
+    padding: 2rem 1.5rem;
   }
 `;
 
@@ -173,7 +179,6 @@ const TapeRight = styled(Tape)`
   }
 `;
 
-// 🌟 Étoiles en caractères bleue ciel
 const StarChar = styled.span`
   position: absolute;
   font-size: 1.5rem;
@@ -204,7 +209,6 @@ const StarBottom = styled(StarChar)`
 export default function NewAlbumSection() {
   return (
     <Section>
-      {/* Étoiles caractères en mobile */}
       <StarTop>★</StarTop>
       <StarMiddle>★</StarMiddle>
       <StarBottom>★</StarBottom>

@@ -18,9 +18,6 @@ const DesktopNav = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15rem;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 600;
   border-top: 1px solid #444;
 
   @media (max-width: 768px) {
@@ -30,24 +27,34 @@ const DesktopNav = styled.div`
 
 // Item de navigation
 const NavItem = styled(Link)`
-  color: white;
+  color: #fff;
   text-decoration: none;
-  letter-spacing: 1px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
   position: relative;
+  margin-right: 6rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   &::after {
     content: "/";
     position: absolute;
-    right: -7.5rem;
-    color: #666;
+    right: -3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-weight: 400;
   }
 
-  &:last-child::after {
-    content: "";
-  }
+  &:last-child {
+    margin-right: 0;
 
-  &:hover {
-    text-decoration: underline;
+    &::after {
+      content: "";
+    }
   }
 `;
 
@@ -69,7 +76,6 @@ const LogoImage = styled.img`
   height: ${(props) => props.size || "35px"};
   object-fit: contain;
 `;
-
 
 const IconWrapper = styled.div`
   cursor: pointer;
@@ -145,7 +151,7 @@ export default function BottomNav() {
 
       {/* Nav Mobile Top */}
       <MobileNavBar>
-        <LogoImage src="/assets/images/logo-moz.png" alt="MOZ logo" />
+        <LogoImage src="/assets/images/title-moz.png" alt="MOZ logo" />
         <IconWrapper onClick={() => setMenuOpen(true)}>
           <Menu size={28} />
         </IconWrapper>
@@ -157,7 +163,7 @@ export default function BottomNav() {
           <Overlay onClick={() => setMenuOpen(false)} />
           <MobileMenu>
             <MenuHeader>
-              <LogoImage src="/assets/images/logo-moz.png" alt="MOZ logo" />
+              <LogoImage src="/assets/images/title-moz.png" alt="MOZ logo" />
               <IconWrapper onClick={() => setMenuOpen(false)}>
                 <X size={32} />
               </IconWrapper>

@@ -10,11 +10,21 @@ const Section = styled.section`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 1rem;
+  }
 `;
 
 const TextContainer = styled.div`
   max-width: 600px;
   color: black;
+
+  @media (max-width: 768px) {
+    transform: none !important;
+  }
 `;
 
 const Title = styled.h2`
@@ -22,24 +32,37 @@ const Title = styled.h2`
   font-size: 4.5rem;
   color: #d86aff;
   margin: 0;
-   transform: translate(300px, -10px);
+  transform: translate(300px, -10px);
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    transform: none;
+  }
 `;
 
 const Subtitle = styled.h3`
-  font-family: "Dancing Script", cursive;
+  font-family: "Kiara Script", cursive;
   font-size: 3.8rem;
   margin: 0.2rem 0 1rem;
   transform: translate(300px, -30px);
   color: #000000;
-  font-family: 'Kiara Script', cursive;
-`;
 
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    transform: none;
+  }
+`;
 
 const Paragraph = styled.p`
   font-size: 0.9rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   transform: translate(300px, -30px);
+
+  @media (max-width: 768px) {
+    transform: none;
+    font-size: 0.95rem;
+  }
 `;
 
 const Button = styled.button`
@@ -51,19 +74,24 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   transform: translate(300px, -30px);
+
   &:hover {
     background-color: #80BC3E;
+  }
+
+  @media (max-width: 768px) {
+    transform: none;
+    margin-top: 1rem;
   }
 `;
 
 const DiskImage = styled.img`
   width: 200px;
-  transform: rotate(-15deg);
-  margin-top: 2rem;
-  transform: translate(40px, -200px);
+  transform: rotate(-15deg) translate(40px, -200px);
 
   @media (max-width: 768px) {
-    margin: 2rem auto 0;
+    transform: none;
+    margin-top: 2rem;
   }
 `;
 
