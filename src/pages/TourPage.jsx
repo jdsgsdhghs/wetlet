@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { db } from "../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import HeroImageBlock from "../components/HeroImageBlock";
 import BottomNav from "../components/BottomNav";
 
+// Style principal de la page
 const PageWrapper = styled.div`
   color: white;
   min-height: 100vh;
@@ -14,6 +14,11 @@ const TitleWrapper = styled.div`
   position: relative;
   text-align: center;
   margin: 3rem auto 1rem;
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
 
 const MainTitle = styled.h2`
@@ -21,15 +26,61 @@ const MainTitle = styled.h2`
   font-weight: 900;
   color: black;
   font-family: "Helvetica", sans-serif;
-  transform: translate(-275px, -25px);
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    font-size: 2rem; /* Adjust the font size for mobile */
+  }
 `;
 
-const Star = styled.img`
+const ArrowIcon = styled.span`
+  font-size: 1.2rem;
+  color: black;
+  margin-right: 0.5rem;
+
+  /* Mobile styles for arrow placement */
+  @media (max-width: 768px) {
+    position: absolute;
+    left: -20px; /* Move the arrow slightly to the left */
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+  }
+`;
+
+const StarIcon = styled.img`
   position: absolute;
-  top: -15px;
-  left: 30%;
-  width: 50px;
-  transform: translate(-200px, -15px) rotate(-20deg);
+  width: 30px;
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    display: block;
+  }
+
+  /* Top star */
+  ${({ top }) =>
+    top &&
+    `
+      top: 10%;
+      left: 5%;
+  `}
+
+  /* Middle star */
+  ${({ middle }) =>
+    middle &&
+    `
+      top: 45%;
+      left: 50%;
+      transform: translateX(-50%);
+  `}
+
+  /* Bottom star */
+  ${({ bottom }) =>
+    bottom &&
+    `
+      bottom: 10%;
+      left: 90%;
+      transform: translateX(-50%);
+  `}
 `;
 
 const TourBlock = styled.div`
@@ -40,6 +91,13 @@ const TourBlock = styled.div`
   border-radius: 15px;
   max-width: 700px;
   margin: 3rem auto;
+
+  /* Hide images and promo content on mobile */
+  @media (max-width: 768px) {
+    background-image: none;
+    padding: 0;
+    margin: 3rem 1rem;
+  }
 `;
 
 const Row = styled.div`
@@ -50,12 +108,18 @@ const Row = styled.div`
   font-size: 1rem;
   color: black;
   font-weight: 600;
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    padding: 1rem 0;
+  }
 `;
 
 const ColLeft = styled.div`
   text-transform: lowercase;
   font-weight: 500;
   width: 30%;
+  position: relative;
 `;
 
 const ColRight = styled.div`
@@ -79,6 +143,11 @@ const PromoWrapper = styled.div`
   margin: 4rem auto 2rem;
   max-width: 800px;
   height: 250px;
+
+  /* Hide promo on mobile */
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const TagContainer = styled.div`
@@ -106,7 +175,7 @@ const TagText = styled.p`
   text-transform: uppercase;
   text-align: center;
   white-space: nowrap;
-   transform: translate(425px, -370px);
+  transform: translate(425px, -370px);
 `;
 
 const GirlImage = styled.img`
@@ -115,12 +184,18 @@ const GirlImage = styled.img`
   bottom: 0;
   right: 0;
   z-index: 3;
-     transform: translate(200px, -200px);
+  transform: translate(200px, -200px);
 `;
+
 const DividerImage = styled.img`
   width: 100%;
   margin-top: -4px;
   display: block;
+
+  /* Hide divider on mobile */
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ExtraDatesWrapper = styled.div`
@@ -130,7 +205,11 @@ const ExtraDatesWrapper = styled.div`
   justify-content: center;
   gap: 6rem;
   position: relative;
-  
+
+  /* Hide extra dates on mobile */
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const PhotoWrapper = styled.div`
@@ -175,16 +254,7 @@ const LocationText = styled.span`
   text-align: right;
 `;
 
-const StarIcon = styled.img`
-  position: absolute;
-  right: 5%;
-  bottom: 15%;
-  width: 50px;
-`;
-
-
-
-export default function TourPage() {
+const TourPage = () => {
   const [tourDates, setTourDates] = useState([]);
 
   useEffect(() => {
@@ -202,20 +272,19 @@ export default function TourPage() {
 
   return (
     <PageWrapper>
-      <HeroImageBlock
-        imageSrc="/assets/images/hero-home.png"
-        titleImageSrc="/assets/images/title-moz.png"
-      />
       <BottomNav />
       <TitleWrapper>
-        <MainTitle>MOZ TOUR</MainTitle>
-        <Star src="/assets/images/star2.png" alt="Star" />
+        <MainTitle>TOUR</MainTitle> {/* Title "TOUR" on mobile */}
+        <StarIcon top src="/assets/images/star2.png" alt="Top Star" />
       </TitleWrapper>
 
+      {/* Tour dates block - Display all dates on mobile */}
       <TourBlock>
-        {tourDates.map((t) => (
+        {tourDates.map((t) => ( // Display all tour dates on mobile
           <Row key={t.id}>
-            <ColLeft>{t.date}</ColLeft>
+            <ColLeft>
+              <ArrowIcon>→</ArrowIcon> {t.date}
+            </ColLeft>
             <ColRight>
               {t.city}, {t.country}
               <Venue> – {t.venue}</Venue>
@@ -224,40 +293,46 @@ export default function TourPage() {
           </Row>
         ))}
       </TourBlock>
+
+      {/* Promo content */}
       <PromoWrapper>
-  <TagContainer>
-    <TagImage src="/assets/images/fond-gris.png" alt="Tag fond gris" />
-    <TagText>NOUVEL ALBUM EN LIVE</TagText>
-  </TagContainer>
-  <GirlImage src="/assets/images/fille.png" alt="Fille bras levés" />
-</PromoWrapper>
-{tourDates.length > 5 && (
-  <>
-    <DividerImage src="/assets/images/rippedpaper.png" alt="Papier déchiré" />
+        <TagContainer>
+          <TagImage src="/assets/images/fond-gris.png" alt="Tag fond gris" />
+          <TagText>NOUVEL ALBUM EN LIVE</TagText>
+        </TagContainer>
+        <GirlImage src="/assets/images/fille.png" alt="Fille bras levés" />
+      </PromoWrapper>
 
-    <ExtraDatesWrapper>
-      <PhotoWrapper>
-        <Tape src="/assets/images/tape-left.png" alt="Scotch gauche" left />
-        <GirlsPhoto src="/assets/images/girls.png" alt="Filles qui mangent" />
-        <Tape src="/assets/images/tape-right.png" alt="Scotch droit" />
-      </PhotoWrapper>
+      {tourDates.length > 5 && (
+        <>
+          <DividerImage src="/assets/images/rippedpaper.png" alt="Papier déchiré" />
 
-      <DatesColumn>
-        {tourDates.slice(5).map((t, index) => (
-          <DateRow key={index}>
-            <DateText>{t.date}</DateText>
-            <LocationText>{t.city}, {t.country}</LocationText>
-          </DateRow>
-        ))}
-      </DatesColumn>
+          <ExtraDatesWrapper>
+            <PhotoWrapper>
+              <Tape src="/assets/images/tape-left.png" alt="Scotch gauche" left />
+              <GirlsPhoto src="/assets/images/girls.png" alt="Filles qui mangent" />
+              <Tape src="/assets/images/tape-right.png" alt="Scotch droit" />
+            </PhotoWrapper>
 
-      <StarIcon src="/assets/images/star.png" alt="Étoile" />
-    </ExtraDatesWrapper>
-  </>
-)}
+            <DatesColumn>
+              {tourDates.slice(5).map((t, index) => (
+                <DateRow key={index}>
+                  <DateText>{t.date}</DateText>
+                  <LocationText>{t.city}, {t.country}</LocationText>
+                </DateRow>
+              ))}
+            </DatesColumn>
 
+            <StarIcon bottom src="/assets/images/star.png" alt="Bottom Star" />
+          </ExtraDatesWrapper>
+        </>
+      )}
 
+      {/* Three stars for mobile */}
+      <StarIcon middle src="/assets/images/star.png" alt="Middle Star" />
+      <StarIcon bottom src="/assets/images/star.png" alt="Bottom Star" />
     </PageWrapper>
-    
   );
-}
+};
+
+export default TourPage;

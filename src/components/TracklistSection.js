@@ -48,6 +48,7 @@ const AlbumCard = styled.div`
   max-width: 250px;
   text-align: center;
   transform: translate(-80px, 30px);
+  position: relative;
 
   @media (max-width: 480px) {
     transform: none;
@@ -95,8 +96,8 @@ const Track = styled.p`
 
 const ReleaseBadge = styled.div`
   position: absolute;
-  top: -20px;
-  right: -20px;
+  top: -30px;
+  right: -40px;
   background: url('/assets/images/fond-gris.png');
   background-size: cover;
   padding: 1.5rem 1rem;
@@ -107,9 +108,10 @@ const ReleaseBadge = styled.div`
   z-index: 3;
 
   @media (max-width: 480px) {
+    top: 10px;
+    left: 10px;
+    right: auto;
     transform: none;
-    top: -10px;
-    right: 10px;
     font-size: 0.8rem;
   }
 `;
@@ -140,8 +142,10 @@ const Star2 = styled.img`
   transform: translate(-15px, 15px);
 
   @media (max-width: 480px) {
-    width: 40px;
-    bottom: -5px;
+    width: 35px;
+    left: 10px;
+    bottom: 10px;
+    transform: none;
   }
 `;
 
@@ -152,6 +156,13 @@ const Star = styled.img`
   width: 90px;
   z-index: 1;
   transform: translate(35px, 190px);
+
+  @media (max-width: 480px) {
+    width: 40px;
+    top: 10px;
+    right: 10px;
+    transform: none;
+  }
 `;
 
 const StarBehind = styled.img`
@@ -162,6 +173,14 @@ const StarBehind = styled.img`
   z-index: 0;
   opacity: 0.8;
   transform: translate(930px, -380px);
+
+  @media (max-width: 480px) {
+    left: 10px;
+    bottom: 10px;
+    transform: none;
+    width: 50px;
+    opacity: 0.6;
+  }
 `;
 
 export default function TracklistBlock() {
@@ -169,7 +188,7 @@ export default function TracklistBlock() {
     <TracklistSection>
       <TopLeftAngle src="/assets/images/corner-top-left.png" alt="Angle haut gauche" />
       <BottomRightAngle src="/assets/images/corner-bottom-right.png" alt="Angle bas droit" />
-      <StarBehind src="/assets/images/star.png" alt="Star" />
+      <StarBehind src="/assets/images/star.png" alt="Étoile fond" />
       <TracklistTitle>Tracklist</TracklistTitle>
 
       <Wrapper>
@@ -194,6 +213,7 @@ export default function TracklistBlock() {
           <Track>10. Don’t speak</Track>
           <Track>11. 11:21</Track>
           <Track>12. U and me at home</Track>
+          <Star src="/assets/images/star.png" alt="Étoile Tracklist" />
         </TracklistContainer>
       </Wrapper>
     </TracklistSection>
