@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Wetleg Moisturizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)...
+🌿 **Wetleg Moisturizer** est un site web React promouvant un groupe musical fictif à travers un design immersif, avec un blog, un album interactif, une galerie photo, des récompenses, et un espace administrateur.
 
-## Available Scripts
+## 🚀 Fonctionnalités principales
 
-In the project directory, you can run:
+- **Page d'accueil** avec sections dynamiques (Hero, Blog, Album, etc.)
+- **Blog** avec carrousel et récompenses
+- **Nouvel album** avec tracklist visuelle
+- **Galerie photo** stylisée
+- **Section tournée** avec formulaire
+- **Espace administrateur** pour gestion de contenu
+- **Support mobile et desktop** via styled-components
 
-### `npm start`
+## 🧱 Structure des composants
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- `App` : composant principal
+- `Header` / `Footer` : navigation
+- `BlogSection`, `BlogCarouselSection`, `BlogRewardSection`
+- `HeroSection`, `HomeContent`, `TracklistSection`
+- `NewAlbumSection`, `MuffinSectionComponent`, `GaleriePhoto`
+- `TornPaperSeparator`, `BottomNav` (mobile)
+## ⚙️ Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+git clone https://github.com/jdsgsdhghs/wetlet.git
+npm start — démarre le serveur de développement
+npm start
 
-### `npm test`
+🧩 Technologies utilisées
+React
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+styled-components
 
-### `npm run build`
+React Router
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+JavaScript / JSX
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+PlantUML (documentation architecture)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+📐 Diagrammes UML
+Les fichiers .puml sont disponibles pour visualiser :
 
-### `npm run eject`
+Les composants React  les pages et la navigation  sont disponible sur le  fifhier pdf
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
