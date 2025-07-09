@@ -6,7 +6,20 @@ import HeroImageBlock from "../components/HeroImageBlock";
 import BottomNav from "../components/BottomNav";
 import Footer from "../components/Footer";
 
-// Wrappers
+// 📆 Format de date en français
+function formatDateFR(dateStr) {
+  const date = new Date(dateStr);
+  const options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  };
+  const formatted = date.toLocaleDateString("fr-FR", options);
+  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+}
+
+// Styled Components (inchangés)
 const PageWrapper = styled.div`
   color: white;
   min-height: 100vh;
@@ -238,10 +251,9 @@ export default function TourPage() {
     <PageWrapper>
       <BottomNav />
 
-      {/* ✅ Version mobile uniquement */}
+      {/* ✅ Mobile */}
       <MobileOnly>
         <MobileBackground>
-          {/* Trois étoiles bleu ciel positionnées différemment */}
           <div style={{ position: "relative", height: "40px", marginBottom: "1.5rem" }}>
             <span style={{
               position: "absolute",
@@ -270,18 +282,18 @@ export default function TourPage() {
           {tourDates.map((t) => (
             <MobileRow key={t.id}>
               <Arrow>➜</Arrow>
-              <ColLeft>{t.date}</ColLeft>
+              <ColLeft>{formatDateFR(t.date)}</ColLeft>
               <ColRight>
                 {t.city}, {t.country}
                 <Venue> – {t.venue}</Venue>
-                {t.soldOut && <SoldOut>(Sold Out)</SoldOut>}
+                {t.soldOut && <SoldOut>(Complet)</SoldOut>}
               </ColRight>
             </MobileRow>
           ))}
         </MobileBackground>
       </MobileOnly>
 
-      {/* ✅ Desktop version intacte */}
+      {/* ✅ Desktop */}
       <DesktopOnly>
         <HeroImageBlock
           imageSrc="/assets/images/hero-home.png"
@@ -295,11 +307,11 @@ export default function TourPage() {
         <TourBlock>
           {tourDates.slice(0, 5).map((t) => (
             <Row key={t.id}>
-              <ColLeft>{t.date}</ColLeft>
+              <ColLeft>{formatDateFR(t.date)}</ColLeft>
               <ColRight>
                 {t.city}, {t.country}
                 <Venue> – {t.venue}</Venue>
-                {t.soldOut && <SoldOut>(Sold Out)</SoldOut>}
+                {t.soldOut && <SoldOut>(Complet)</SoldOut>}
               </ColRight>
             </Row>
           ))}
@@ -326,11 +338,11 @@ export default function TourPage() {
               <DatesColumn>
                 {tourDates.slice(5).map((t, index) => (
                   <Row key={index}>
-                    <ColLeft>{t.date}</ColLeft>
+                    <ColLeft>{formatDateFR(t.date)}</ColLeft>
                     <ColRight>
                       {t.city}, {t.country}
                       <Venue> – {t.venue}</Venue>
-                      {t.soldOut && <SoldOut>(Sold Out)</SoldOut>}
+                      {t.soldOut && <SoldOut>(Complet)</SoldOut>}
                     </ColRight>
                   </Row>
                 ))}
