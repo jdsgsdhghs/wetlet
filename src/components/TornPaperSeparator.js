@@ -2,23 +2,21 @@ import styled from "styled-components";
 
 const TornPaper = styled.img`
   display: block;
-  width: 100%;
   height: auto;
   position: relative;
   z-index: 5;
-  margin: 0;
-  transform: translateY(-60px);
-
-  @media (max-width: 768px) {
-    transform: translateY(-30px);
-  }
+  width: 100%;
+  margin-top: ${(props) => props.marginTop || "0"};
+  transform: ${(props) => props.transform || "none"};
+  transform: translate(0px, -470px);
 `;
 
-export default function TornPaperSeparator() {
+export default function TornPaperSeparator({ marginTop, transform }) {
   return (
-    <TornPaper
-      src="/assets/images/rippedpaper.png"
-      alt="Bord déchiré"
-    />
+   <TornPaper src="/assets/images/rippedpaper.png" alt="Bord déchiré"
+    marginTop={marginTop}
+      transform={transform} />
+
+
   );
 }

@@ -4,11 +4,13 @@ import HomePage from "./pages/HomePage";
 import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
 import TourForm from "./pages/TourForm";
-import TourPage from "./pages/TourPage"; 
+import Blog from "./pages/Blog";
 import Album from "./pages/Album";
 import Wetleg from "./pages/wetleg";
-import BlogPage from "./pages/Blog";
 
+import Mentions from "./pages/Mentions";
+import Wetleg2025 from "./pages/Wetleg2025";
+import TourPageResponsive from "./pages/TourPageResponsive";
 import GlobalStyle from './GlobalStyle';
 
 function App() {
@@ -41,9 +43,12 @@ function App() {
         <Route path="/login" element={<LoginPage setIsAdmin={setIsAdmin} />} />
 <Route path="/album" element={<Album />} />
 <Route path="/wetleg" element={<Wetleg />} />
-<Route path="/blog" element={<BlogPage />} /> 
-        <Route path="/tour" element={<TourPage />} />
-        
+
+   
+         <Route path="/mentions-legales" element={<Mentions />} />
+        <Route path="/wetleg-2025" element={<Wetleg2025 />} />
+        <Route path="/tour" element={<TourPageResponsive />} />
+<Route path="/blog" element={<Blog />} />
 
       </Routes>
     </Router>

@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import HeroImageBlock from "../components/HeroImageBlock";
 import BottomNav from "../components/BottomNav";
+import MobileMenu from "../components/MobileMenu";
 import GaleriePhoto from "../components/GaleriePhoto";
 import Footer from "../components/Footer";
 
-// ✅ Affiche uniquement sur desktop
-const DesktopOnly = styled.div`
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
+// Styled components
 const Section = styled.section`
   display: flex;
   align-items: center;
@@ -20,11 +15,6 @@ const Section = styled.section`
   gap: 4rem;
   background-color: #f7f5f2;
   position: relative;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-  }
 `;
 
 const PhotoWrapper = styled.div`
@@ -32,12 +22,6 @@ const PhotoWrapper = styled.div`
   max-width: 400px;
   border: 30px solid white;
   box-shadow: 70px 65px 60px rgba(252, 246, 246, 0.97);
-
-  @media (max-width: 768px) {
-    margin: 0 auto;
-    max-width: 90%;
-    border: 15px solid white;
-  }
 `;
 
 const Image = styled.img`
@@ -53,7 +37,8 @@ const Tape = styled.img`
   transform: translate(100px, 150px) rotate(-15deg);
 
   @media (max-width: 768px) {
-    display: none;
+    width: 150px;
+    transform: translate(40px, 80px) rotate(-10deg);
   }
 `;
 
@@ -61,7 +46,8 @@ const Content = styled.div`
   max-width: 500px;
 
   @media (max-width: 768px) {
-    padding: 0 1rem;
+    text-align: center;
+    margin: 0 auto;
   }
 `;
 
@@ -69,10 +55,9 @@ const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  justify-content: center;
 
   @media (max-width: 768px) {
-    margin-bottom: 1rem;
+    justify-content: center;
   }
 `;
 
@@ -84,7 +69,7 @@ const Title = styled.h1`
   z-index: 1;
 
   @media (max-width: 768px) {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 `;
 
@@ -93,39 +78,55 @@ const Star = styled.img`
   width: 100px;
   top: -20px;
   right: -40px;
-  transform: ${({ rotate, translateX = 0, translateY = 0 }) =>
+  transform: ${({ rotate = 0, translateX = 0, translateY = 0 }) =>
     `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg)`};
 
   @media (max-width: 768px) {
     width: 60px;
+    right: -20px;
     top: -10px;
-    right: -10px;
-    transform: rotate(${({ rotate }) => rotate || 0}deg);
+    transform: translate(-40px, -20px) rotate(15deg);
   }
 `;
 
 const Subtitle = styled.h3`
   margin-top: 1rem;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 const Paragraph = styled.p`
   font-size: 0.95rem;
   line-height: 1.5;
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
-const Wetleg = () => {
-  return (
-    <div>
-      {/* ✅ Affiché uniquement sur desktop */}
-      <DesktopOnly>
-        <HeroImageBlock
-          imageSrc="/assets/images/hero-home.png"
-          titleImageSrc="/assets/images/title-moz.png"
-        />
-      </DesktopOnly>
+export default function Wetleg() {
+  const [isMobile, setIsMobile] = useState(false);
 
-      <BottomNav />
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <>
+      <HeroImageBlock
+        imageSrc="/assets/images/hero-home.png"
+        titleImageSrc="/assets/images/title-moz.png"
+      />
+
+      {isMobile ? <MobileMenu /> : <BottomNav />}
 
       <Section>
         <PhotoWrapper>
@@ -144,23 +145,22 @@ const Wetleg = () => {
             />
             <Title>WETLEG</Title>
           </TitleWrapper>
+
           <Subtitle>Ironie, guitare, liberté.</Subtitle>
+
           <Paragraph>
             Wet Leg est un duo britannique formé sur l'île de Wight, connu pour
             ses morceaux à la fois percutants et désinvoltes. Avec une énergie
-            brute et un goût prononcé pour l’absurde, elles bousculent les
-            codes de l’indie rock avec humour et fraîcheur. Leur musique,
-            portée par des guitares nerveuses et des refrains accrocheurs,
-            évoque autant la spontanéité de la jeunesse que le besoin
-            d’évasion.
+            brute et un goût prononcé pour l’absurde, elles bousculent les codes
+            de l’indie rock avec humour et fraîcheur. Leur musique, portée par
+            des guitares nerveuses et des refrains accrocheurs, évoque autant la
+            spontanéité de la jeunesse que le besoin d’évasion.
           </Paragraph>
         </Content>
       </Section>
 
       <GaleriePhoto />
       <Footer />
-    </div>
+    </>
   );
-};
-
-export default Wetleg;
+}

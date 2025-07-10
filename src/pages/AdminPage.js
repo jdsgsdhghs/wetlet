@@ -3,21 +3,9 @@ import { db } from "../config/firebase";
 import { collection, deleteDoc, doc, onSnapshot, query } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-// Animation keyframes
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
-
-// Styled components
 const Container = styled.div`
   padding: 2rem;
   max-width: 720px;
@@ -29,14 +17,6 @@ const Title = styled.h1`
   font-weight: 700;
   margin-bottom: 2rem;
   color: #1e293b;
-`;
-
-const ButtonWrapper = styled.div`
-  margin-bottom: 2rem;
-  @media (max-width: 640px) {
-    display: flex;
-    justify-content: center;
-  }
 `;
 
 const Button = styled.button`
@@ -86,43 +66,56 @@ const SoldOut = styled.span`
   margin-left: 0.5rem;
 `;
 
-// Modal
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+`;
+
+const ReturnLink = styled(Link)`
+  background-color: #22c55e;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+// Modal styles
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 50;
-  animation: ${fadeIn} 0.2s ease-out;
+  justify-content: center;
+  z-index: 999;
 `;
 
 const ModalContent = styled.div`
   background: white;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 10px;
+  max-width: 400px;
   text-align: center;
-  max-width: 90%;
-  min-width: 280px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  animation: ${fadeIn} 0.3s ease-out;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 `;
 
-const ModalTitle = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`;
-
-const ModalActions = styled.div`
+const ModalButtons = styled.div`
   margin-top: 1.5rem;
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: space-around;
 `;
 
 const CancelButton = styled(Button)`
@@ -134,8 +127,8 @@ const CancelButton = styled(Button)`
 
 export default function AdminPage() {
   const [tourDates, setTourDates] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [dateToDelete, setDateToDelete] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -149,36 +142,36 @@ export default function AdminPage() {
   }, []);
 
   const confirmDelete = id => {
-    setDateToDelete(id);
-    setShowModal(true);
+    setSelectedId(id);
+    setIsModalOpen(true);
   };
 
-  const handleDelete = async () => {
-    if (dateToDelete) {
-      await deleteDoc(doc(db, "tourDates", dateToDelete));
-      setDateToDelete(null);
-      setShowModal(false);
+  const handleConfirmDelete = async () => {
+    if (selectedId) {
+      await deleteDoc(doc(db, "tourDates", selectedId));
+      setIsModalOpen(false);
+      setSelectedId(null);
     }
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setDateToDelete(null);
   };
 
   return (
     <Container>
-      <Title>Dates de tournée du groupe wetleg</Title>
-
       <ButtonWrapper>
+        <ReturnLink to="/">← Retour à l’accueil</ReturnLink>
         <Button onClick={() => navigate("/admin/new")}>➕ Nouveau</Button>
       </ButtonWrapper>
+
+      <Title>Dates de tournée du groupe wetleg</Title>
 
       <List>
         {tourDates.map(t => (
           <ListItem key={t.id}>
             <span>
-              {t.date} – {t.city}, {t.country} @ {t.venue}
+              {new Date(t.date.seconds ? t.date.seconds * 1000 : t.date).toLocaleDateString("fr-FR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })} – {t.city}, {t.country} @ {t.venue}
               {t.soldOut && <SoldOut>(Sold Out)</SoldOut>}
             </span>
             <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -196,11 +189,7 @@ export default function AdminPage() {
               </Button>
               <DeleteButton
                 onClick={() => confirmDelete(t.id)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                }}
+                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
               >
                 <FaTrash />
                 Supprimer
@@ -210,15 +199,14 @@ export default function AdminPage() {
         ))}
       </List>
 
-      {showModal && (
-        <ModalOverlay onClick={handleCloseModal}>
-          <ModalContent onClick={e => e.stopPropagation()}>
-            <ModalTitle>Confirmer la suppression</ModalTitle>
+      {isModalOpen && (
+        <ModalOverlay>
+          <ModalContent>
             <p>Es-tu sûr(e) de vouloir supprimer cette date de tournée ?</p>
-            <ModalActions>
-              <CancelButton onClick={handleCloseModal}>Annuler</CancelButton>
-              <DeleteButton onClick={handleDelete}>Supprimer</DeleteButton>
-            </ModalActions>
+            <ModalButtons>
+              <CancelButton onClick={() => setIsModalOpen(false)}>Annuler</CancelButton>
+              <DeleteButton onClick={handleConfirmDelete}>Oui, supprimer</DeleteButton>
+            </ModalButtons>
           </ModalContent>
         </ModalOverlay>
       )}

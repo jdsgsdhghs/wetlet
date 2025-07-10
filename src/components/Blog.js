@@ -8,24 +8,12 @@ const SectionWrapper = styled.section`
   text-align: center;
   padding: 21rem 1rem 6rem;
   position: relative;
-  transform: translate(0px, 90px);
-
-  @media (max-width: 768px) {
-    padding: 12rem 1rem 4rem;
-    transform: translate(0px, 40px);
-  }
+   transform: translate(0px, 90px);
 `;
 
 const TitleWrapper = styled.div`
   position: relative;
   display: inline-block;
-
-  @media (max-width: 768px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
 `;
 
 const Title = styled.h1`
@@ -34,12 +22,6 @@ const Title = styled.h1`
   margin-bottom: 1rem;
   font-family: "Helvetica", sans-serif;
   transform: translate(220px, 10px);
-
-  @media (max-width: 768px) {
-    font-size: 2.5rem;
-    transform: none;
-    text-align: center;
-  }
 `;
 
 const StarIcon = styled.img`
@@ -48,14 +30,7 @@ const StarIcon = styled.img`
   right: -30px;
   width: 80px;
   transform: translate(1050px, -50px);
-
-  @media (max-width: 768px) {
-    position: relative;
-    transform: none;
-    bottom: auto;
-    right: auto;
-    margin-top: -1rem;
-  }
+ 
 `;
 
 const Text = styled.p`
@@ -63,11 +38,6 @@ const Text = styled.p`
   margin: 0 auto 2rem;
   font-size: 0.9rem;
   line-height: 1.6;
-
-  @media (max-width: 768px) {
-    padding: 0 1rem;
-    font-size: 0.85rem;
-  }
 `;
 
 const Button = styled.button`
@@ -80,15 +50,9 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   transition: background 0.3s;
-
   &:hover {
     background-color: #55b752;
-  }
-
-  @media (max-width: 768px) {
-    transform: none;
-    margin: 1rem auto;
-    display: block;
+    
   }
 `;
 
@@ -98,10 +62,6 @@ const TornTop = styled.img`
   top: 0;
   left: 0;
   transform: translate(2px, -110px);
-
-  @media (max-width: 768px) {
-    transform: translate(0, -60px);
-  }
 `;
 
 const TornBottom = styled.img`
@@ -110,12 +70,8 @@ const TornBottom = styled.img`
   bottom: 0;
   left: 0;
   transform: translate(-2px, -25px);
-  z-index: 10;
-  pointer-events: none;
-
-  @media (max-width: 768px) {
-    transform: translate(0, 0);
-  }
+  z-index: 10; /* plus haut que les autres */
+  pointer-events: none; /* pour éviter de bloquer les clics en dessous */
 `;
 
 export default function BlogSection() {
@@ -123,7 +79,7 @@ export default function BlogSection() {
     <>
       <TitleWrapper>
         <Title>BLOG</Title>
-        <StarIcon src="/assets/images/Star.png" />
+        <StarIcon src="/assets/images/Star.png"  />
       </TitleWrapper>
       <Text>
         Bienvenue sur le blog officiel de Wet Leg. <br />
